@@ -16,6 +16,8 @@ $lutador[1]->apresentar();
 
 $luta = new Luta();
 $luta->marcarLuta($lutador[0], $lutador[1]);
+$luta->marcarLuta($lutador[2], $lutador[3]);$luta->marcarLuta($lutador[0], $lutador[1]);
+$luta->marcarLuta($lutador[2], $lutador[3]);
 $luta->lutar();
 
 $lutador[0]->status();

@@ -8,13 +8,20 @@ class Luta {
     private $desafiado;
     private $rounds;
     private $aprovada;
+    private $desafiadoArray;
+    private $desafiadorArray;
 
     function marcarLuta($l1, $l2) {
+
         if (($l1->getCategoria() === $l2->getCategoria()) && ($l1 != $l2)) {
 
             $this->setAprovada(true);
             $this->setDesafiado($l1);
             $this->setDesafiador($l2);
+            $this->desafiadoArray[] = array($this->getDesafiado()->getNome());
+            $this->desafiadorArray[] = array($this->getDesafiador()->getNome());
+
+            echo"testeqweqweqw";
         } else {
             $this->setAprovada(false);
             $this->setDesafiado(NULL);
@@ -22,13 +29,28 @@ class Luta {
         }
     }
 
+    function help() {
+
+        echo "<h1>CONTADOR DE LUTAS " . count($this->desafiadorArray) . "</h1>";
+        for ($posicao1 = 0; $posicao1 < count($this->desafiadorArray); $posicao1++) {
+            echo "<h2>";
+            echo "Luta " . count($posicao1) . " entre <br>";
+            echo "</h2>";
+            echo "<h3>";
+            echo "Desafiado " . $desafiadoArray[$posicao1] . "<br>";
+            echo "Desafiador " . $desafiadorArray[$posicao1] . "<br>";
+            echo "</h3>";
+        }
+    }
+
     function lutar() {
         if ($this->getAprovada()) {
+            $this->help();
             $this->getDesafiado()->apresentar();
             $this->getDesafiador()->apresentar();
             $this->setRounds(rand(1, 5));
             $vencedor = rand(0, 2);
-            echo 'varial'.$vencedor;
+            echo 'varial' . $vencedor;
             switch ($vencedor) {
                 case 0:
                     echo'<br>';
@@ -38,17 +60,17 @@ class Luta {
                     break;
                 case 1:
                     echo'<br>';
-                    echo'<h3>O vencedor foi '  . $this->getDesafiador()->getNome().'</h3>';
-                     echo'<br>';
-                    echo'<h3>A luta teve '  . $this->rounds.' Rounds </h3>';
+                    echo'<h3>O vencedor foi ' . $this->getDesafiado()->getNome() . '</h3>';
+                    echo'<br>';
+                    echo'<h3>A luta teve ' . $this->rounds . ' Rounds </h3>';
                     $this->getDesafiado()->ganharLuta();
                     $this->getDesafiador()->perderLuta();
                     break;
                 case 2:
                     echo'<br>';
-                    echo'<h3>O vencedor foi '  . $this->getDesafiador()->getNome().'</h3>';
-                     echo'<br>';
-                    echo'<h3>A luta teve '  . $this->rounds.' Rounds </h3>';
+                    echo'<h3>O vencedor foi ' . $this->getDesafiador()->getNome() . '</h3>';
+                    echo'<br>';
+                    echo'<h3>A luta teve ' . $this->rounds . ' Rounds </h3>';
                     $this->getDesafiado()->perderLuta();
                     $this->getDesafiador()->ganharLuta();
                     break;
