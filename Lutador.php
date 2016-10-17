@@ -38,6 +38,8 @@ class Lutador {
         echo '<br>';
         echo 'Empates:' . $this->getEmpates();
         echo '<br>';
+        echo 'Categoria:' . $this->getCategoria();
+        echo '<br>';
         echo '----------------------------------';
     }
 
@@ -86,18 +88,6 @@ class Lutador {
     }
 
     function getCategoria() {
-        if ($this->getPeso() < 40) {
-            $this->setCategoria('Desqualificado');
-        }
-        if (($this->getPeso() < 60) || ($this->getPeso() >= 40)) {
-            $this->setCategoria('Peso Pena');
-        }
-        if (($this->getPeso() >= 60 ) || $this->getPeso() < 120) {
-            $this->setCategoria('Peso Galo');
-        }
-        if ($this->getPeso() >= 120) {
-            $this->setCategoria('Peso Pesado');
-        }
         return $this->categoria;
     }
 
@@ -123,10 +113,22 @@ class Lutador {
 
     function setPeso($peso) {
         $this->peso = $peso;
+        $this->setCategoria($peso);
     }
 
-    function setCategoria($categoria) {
-        $this->categoria = $categoria;
+    function setCategoria($peso) {
+        if ($peso < 40) {
+            $this->categoria = ' Desqualificado';
+        } elseif ($peso < 60) {
+            $this->categoria = ' Peso Pena';
+        } elseif ($peso < 120) {
+            $this->categoria = ' Peso Galo';
+        } elseif ($peso < 150) {
+            $this->categoria = ' Peso Pesado';
+        } else {
+            $this->categoria = ' Invalido para lutar';
+        }
+       
     }
 
     function setVitorias($vitorias) {
