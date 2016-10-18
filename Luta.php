@@ -10,6 +10,8 @@ class Luta {
     private $aprovada;
     private $desafiadoArray;
     private $desafiadorArray;
+    private $desafiadoArrayRecusado;
+    private $desafiadorArrayRecusado;
 
     function marcarLuta($l1, $l2) {
 
@@ -18,28 +20,46 @@ class Luta {
             $this->setAprovada(true);
             $this->setDesafiado($l1);
             $this->setDesafiador($l2);
-            $this->desafiadoArray[] = array($this->getDesafiado()->getNome());
-            $this->desafiadorArray[] = array($this->getDesafiador()->getNome());
-
-            echo"testeqweqweqw";
+            $this->desafiadoArray[] = ($this->getDesafiado()->getNome());
+            $this->desafiadorArray[] = ($this->getDesafiador()->getNome());
         } else {
+
             $this->setAprovada(false);
-            $this->setDesafiado(NULL);
-            $this->setDesafiador(NULL);
+            $this->setDesafiado($l1);
+            $this->setDesafiador($l2);
+            $this->desafiadoArrayRecusado[] = ($this->getDesafiado()->getNome());
+            $this->desafiadorArrayRecusado[] = ($this->getDesafiador()->getNome());
         }
     }
 
     function help() {
+        /* echo "<h1>CONTADOR DE LUTAS " . count($this->desafiadorArray) . "</h1>";
+          foreach ($this->desafiadorArray as $valor) {
+          echo 'CONTADOR DE LUTAS'.$this->desafiadoArray[$i];
+          echo'<br>';
+          $i++;
+          }
+         */if ($this->getAprovada()) {
+            $ordemLuta = 1;
+            for ($posicao1 = 0; $posicao1 < count($this->desafiadorArray); $posicao1++) {
 
-        echo "<h1>CONTADOR DE LUTAS " . count($this->desafiadorArray) . "</h1>";
-        for ($posicao1 = 0; $posicao1 < count($this->desafiadorArray); $posicao1++) {
-            echo "<h2>";
-            echo "Luta " . count($posicao1) . " entre <br>";
-            echo "</h2>";
-            echo "<h3>";
-            echo "Desafiado " . $desafiadoArray[$posicao1] . "<br>";
-            echo "Desafiador " . $desafiadorArray[$posicao1] . "<br>";
-            echo "</h3>";
+                echo "<h2>";
+                echo "Luta " . $ordemLuta . " entre <br>";
+                echo "</h2>";
+                echo "<h3>";
+                echo "Desafiado " . $this->desafiadoArray[$posicao1] . "<br>";
+                echo "Desafiador " . $this->desafiadorArray[$posicao1] . "<br>";
+                echo "</h3>";
+                $ordemLuta ++;
+            }
+        } else {
+            echo'Lutas canceladas por incompatibilidades';
+            for ($posicao1 = 0; $posicao1 < count($this->desafiadoArrayRecusado); $posicao1++) {
+                echo "<h4>";
+                echo "Desafiado " . $this->desafiadoArrayRecusado[$posicao1] . "<br>";
+                echo "Desafiador " . $this->desafiadorArrayRecusado[$posicao1] . "<br>";
+                echo "</h42>";
+            }
         }
     }
 
@@ -76,8 +96,20 @@ class Luta {
                     break;
             }
         } else {
-            echo "<p>luta não pode acontecer</p>";
+
+
+            $this->help();
         }
+        echo '<pre>';
+        print_r($this->desafiadoArrayRecusado);
+        echo '<br>';
+        print_r($this->desafiadorArrayRecusado);
+        echo '<br>';
+        echo'=================';
+        echo '<br>';
+        print_r($this->desafiadorArray);
+        print_r($this->desafiadoArray);
+        echo '</pre>';
     }
 
     function getDesafiador() {
