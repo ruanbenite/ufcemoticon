@@ -17,22 +17,20 @@ echo '<br>';
 //$lutador[1]->getCategoria();
 
 $luta = new Luta();
+
+$luta->marcarLuta($lutador[0], $lutador[1]);
+$luta->marcarLuta($lutador[2], $lutador[3]);
+$luta->marcarLuta($lutador[4], $lutador[5]);
 $luta->marcarLuta($lutador[0], $lutador[1]);
 
 $luta->marcarLuta($lutador[2], $lutador[3]);
-//$luta->marcarLuta($lutador[4], $lutador[5]);
-echo'<pre> oo';
- print_r($luta->array1);
- echo '<br>'.  count($luta->array1);
-echo'</pre>';
+$luta->marcarLuta($lutador[4], $lutador[5]);
 //$luta->marcarLuta($lutador[2], $lutador[3]);
 //$luta->marcarLuta($lutador[4], $lutador[5]);
 //$luta->marcarLuta($lutador[2], $lutador[3]);
 //$luta->marcarLuta($lutador[1], $lutador[1]);
 //$luta->marcarLuta($lutador[1], $lutador[5]);
 //$luta->marcarLuta($lutador[1], $lutador[1]);
-
-
 $luta->lutar();
 
 //$lutador[0]->status();
